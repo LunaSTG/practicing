@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Phản xạ tiếng Anh · Unit 5–7</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--ink:#1d2433;--mute:#6b7280;--line:#e5e7eb;--pri:#2563eb;--pri2:#dbeafe;--ok:#15803d;--okbg:#dcfce7;--bad:#b91c1c;--badbg:#fee2e2}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);-webkit-tap-highlight-color:transparent}
+.wrap{max-width:640px;margin:0 auto;padding:16px 16px 48px}
+h1{font-size:22px;margin:8px 0 4px}.sub{color:var(--mute);margin:0 0 16px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.card h2{font-size:17px;margin:0 0 4px}.card p{margin:0 0 12px;color:var(--mute);font-size:14px}
+.lbl{font-size:13px;color:var(--mute);margin:0 0 6px;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-size:15px;cursor:pointer;color:var(--ink)}
+.chip.on{background:var(--pri);border-color:var(--pri);color:#fff}
+.seg{display:flex;background:#eef0f5;border-radius:12px;padding:3px;margin-bottom:10px}
+.seg button{flex:1;border:0;background:transparent;padding:9px 6px;border-radius:9px;font-size:14px;cursor:pointer;color:var(--ink)}
+.seg button.on{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.12);font-weight:600}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:12px;padding:12px 14px;font-size:16px;cursor:pointer;background:var(--pri);color:#fff;font-weight:600}
+.btn.full{width:100%}.btn.ghost{background:#eef0f5;color:var(--ink);font-weight:500}.btn.ok{background:var(--ok)}.btn.bad{background:var(--bad)}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:8px;margin-top:8px}.row>*{flex:1}
+label.chk{display:flex;gap:8px;align-items:center;font-size:14px;margin:6px 0 10px}
+.top{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.top .t{flex:1;font-size:14px;color:var(--mute);text-align:center}
+.icon{border:0;background:#eef0f5;border-radius:10px;width:40px;height:40px;font-size:18px;cursor:pointer;color:var(--ink)}
+.bar{height:6px;background:#e5e7eb;border-radius:9px;overflow:hidden;margin-bottom:14px}.bar i{display:block;height:100%;background:var(--pri);width:0;transition:width .3s}
+.tag{display:inline-block;font-size:12px;padding:3px 9px;border-radius:999px;background:var(--pri2);color:#1e40af;margin-right:6px;font-weight:600}
+.tag.ask{background:#fef3c7;color:#92400e}.tag.u{background:#eef0f5;color:var(--ink)}
+.flash{min-height:270px;display:flex;flex-direction:column;justify-content:center;text-align:center;cursor:pointer;user-select:none}
+.flash .big{font-size:24px;line-height:1.35;font-weight:600;margin:14px 0 6px}
+.flash .small{color:var(--mute);font-size:16px}
+.flash .qs{text-align:left;font-size:14px;color:var(--mute);margin-top:14px;border-top:1px dashed var(--line);padding-top:10px}
+.flash .qs div{margin:3px 0}
+.hint{font-size:13px;color:var(--mute);text-align:center;margin:6px 0 10px}
+.prompt{font-size:22px;font-weight:600;line-height:1.35;margin:12px 0 2px;min-height:30px}
+.prompt.hid{color:var(--mute);font-weight:500;font-size:16px}
+.stage{display:flex;flex-direction:column;align-items:center;padding:14px 0 4px}
+.mic{width:116px;height:116px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:44px;background:#eef0f5;position:relative;transition:background .2s}
+.mic.listen{background:var(--pri2)}.mic.speak{background:var(--okbg);animation:pulse 1s infinite}
+.mic .n{position:absolute;bottom:-4px;right:-4px;background:var(--pri);color:#fff;border-radius:50%;width:40px;height:40px;font-size:20px;display:flex;align-items:center;justify-content:center;font-weight:700}
+@keyframes pulse{50%{transform:scale(1.06)}}
+.status{margin-top:12px;font-size:15px;color:var(--mute);min-height:22px;text-align:center}
+.heard{font-size:15px;font-style:italic;min-height:22px;text-align:center;margin-top:4px}
+.result{border-radius:14px;padding:14px;margin-top:10px}
+.result.ok{background:var(--okbg)}.result.bad{background:var(--badbg)}.result.neu{background:#eef0f5}
+.verdict{font-weight:700;font-size:18px;margin-bottom:6px}
+.ans{font-size:20px;line-height:1.4;font-weight:600}
+.ans .m{color:var(--bad);text-decoration:underline wavy;text-underline-offset:4px}
+.vi{color:var(--mute);font-size:15px;margin-top:4px}
+.said{font-size:14px;margin-top:8px}
+.ctrls{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.ctrls .btn{flex:1;min-width:30%}
+.list .it{padding:10px 0;border-bottom:1px solid var(--line)}.list .it:last-child{border:0}
+.list .en{font-weight:600}.list .v{color:var(--mute);font-size:14px}
+.score{font-size:42px;font-weight:800;text-align:center;margin:6px 0}
+.set{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0;font-size:15px}
+.set input[type=range]{flex:1;max-width:200px}.set b{min-width:48px;text-align:right}
+.note{font-size:13px;background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:10px 12px;margin-bottom:14px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HOME -->
+<section id="home">
+  <h1>Phản xạ tiếng Anh</h1>
+  <p class="sub">Unit 5 · 6 · 7 — <span id="total"></span> mẫu câu</p>
+  <div id="warn" class="note" hidden></div>
+
+  <div class="lbl">Chọn unit</div>
+  <div class="chips" id="units"></div>
+
+  <div class="card">
+    <h2>🃏 Thẻ lật</h2>
+    <p>Lật thẻ để xem nghĩa. Bấm "Chưa thuộc" thì thẻ sẽ quay lại cuối lượt.</p>
+    <div class="seg" id="fdir"><button data-v="vi">Việt → Anh</button><button data-v="en">Anh → Việt</button></div>
+    <label class="chk"><input type="checkbox" id="fshuf" checked> Trộn ngẫu nhiên</label>
+    <label class="chk"><input type="checkbox" id="fhide"> Ẩn thẻ đã thuộc (<span id="knownN">0</span>)</label>
+    <button class="btn full" id="goFlash">Bắt đầu thẻ lật</button>
+  </div>
+
+  <div class="card">
+    <h2>🎤 Phản xạ nói</h2>
+    <p>Máy đọc câu hỏi. Sau tiếng bíp, bạn có <b id="waitTxt">5</b> giây để bắt đầu nói. Nói hết câu thì máy tự chấm.</p>
+    <div class="seg" id="dord"><button data-v="rand">Ngẫu nhiên</button><button data-v="seq">Theo unit</button></div>
+    <button class="btn full" id="goDrill">Bắt đầu luyện nói</button>
+    <button class="btn full ghost" id="goWrong" style="margin-top:8px" hidden></button>
+  </div>
+
+  <button class="btn full ghost" id="goSet">⚙️ Cài đặt & thử micro</button>
+</section>
+
+<!-- FLASH -->
+<section id="flash" hidden>
+  <div class="top"><button class="icon" data-home>✕</button><div class="t" id="fProg"></div><button class="icon" id="fSay" title="Nghe">🔊</button><button class="icon" id="fSlow" title="Nghe chậm">🐢</button></div>
+  <div class="bar"><i id="fBar"></i></div>
+  <div class="card flash" id="fCard"></div>
+  <div class="hint">Chạm thẻ để lật · Máy tính: Space = lật, ← chưa thuộc, → đã thuộc</div>
+  <div class="row"><button class="btn bad" id="fNo">✗ Chưa thuộc</button><button class="btn ok" id="fYes">✓ Đã thuộc</button></div>
+</section>
+
+<!-- FLASH DONE -->
+<section id="fdone" hidden>
+  <div class="card" style="text-align:center">
+    <div class="score">🎉</div>
+    <h2>Đã thuộc hết lượt này!</h2>
+    <p id="fdoneTxt"></p>
+    <div class="row"><button class="btn ghost" data-home>Về trang chính</button><button class="btn" id="fAgain">Học lại</button></div>
+  </div>
+</section>
+
+<!-- DRILL -->
+<section id="drill" hidden>
+  <div class="top"><button class="icon" data-home>✕</button><div class="t" id="dProg"></div><button class="icon" id="dPause" title="Tạm dừng">⏸</button></div>
+  <div class="bar"><i id="dBar"></i></div>
+  <div class="card">
+    <div><span class="tag u" id="dUnit"></span><span class="tag" id="dType"></span></div>
+    <div class="prompt" id="dPrompt"></div>
+    <div class="stage">
+      <div class="mic" id="mic"><span id="micI">🔊</span><span class="n" id="micN" hidden></span></div>
+      <div class="status" id="dStatus"></div>
+      <div class="heard" id="heard"></div>
+    </div>
+    <div id="dRes" hidden></div>
+    <button class="btn full" id="goNext" style="margin-top:12px" hidden>Câu tiếp ▶</button>
+    <div class="row" id="manualBtns" hidden><button class="btn bad" id="mNo">✗ Sai</button><button class="btn ok" id="mYes">✓ Đúng</button></div>
+  </div>
+  <div class="ctrls">
+    <button class="btn ghost" id="dRedo">🔁 Làm lại câu này</button>
+    <button class="btn ghost" id="dNext">⏭ Câu tiếp</button>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section id="sum" hidden>
+  <div class="card">
+    <div class="score" id="sScore"></div>
+    <p style="text-align:center" id="sTxt"></p>
+    <div class="row"><button class="btn ghost" data-home>Trang chính</button><button class="btn ghost" id="sAll">Làm lại từ đầu</button></div>
+    <button class="btn full" id="sWrong" style="margin-top:8px">Luyện lại câu sai</button>
+  </div>
+  <div class="card list" id="sList"></div>
+</section>
+
+<!-- SETTINGS -->
+<section id="settings" hidden>
+  <div class="top"><button class="icon" data-home>✕</button><div class="t">Cài đặt</div><span style="width:40px"></span></div>
+  <div class="card">
+    <div class="set">Thời gian để bắt đầu nói<input type="range" id="sWait" min="2" max="8" step="1"><b id="sWaitV"></b></div>
+    <div class="set">Tốc độ đọc<input type="range" id="sRate" min="0.6" max="1.2" step="0.05"><b id="sRateV"></b></div>
+    <div class="set">Mức chấm đạt<input type="range" id="sThr" min="60" max="100" step="5"><b id="sThrV"></b></div>
+    <label class="chk"><input type="checkbox" id="sShow"> Hiện chữ câu hỏi trên màn hình</label>
+    <label class="chk"><input type="checkbox" id="sAuto"> Tự chuyển câu sau khi chấm (tắt = tự bấm "Câu tiếp")</label>
+    <div class="set" id="sDelayRow">Chờ trước khi chuyển<input type="range" id="sDelay" min="2" max="10" step="1"><b id="sDelayV"></b></div>
+  </div>
+  <div class="card">
+    <h2>Thử loa & micro</h2>
+    <p>Máy đọc một câu, sau đó bạn nói "Hello, how are you?" để kiểm tra.</p>
+    <button class="btn full" id="tMic">▶ Thử ngay</button>
+    <div class="status" id="tOut"></div>
+    <p id="voiceInfo" style="margin-top:10px;font-size:13px"></p>
+  </div>
+  <div class="card">
+    <h2>Tiến độ trên máy này</h2>
+    <p>Lưu các câu đang sai và các thẻ đã thuộc.</p>
+    <button class="btn full ghost" id="reset">Xóa tiến độ</button>
+  </div>
+</section>
+
+</div>
+<script>
+const DATA=[{"u": 5, "q": ["What are you looking for?", "Are you looking for a white shirt?", "What kind of shirt do you need?"], "a": "I’m looking for a white shirt.", "v": "Tôi đang tìm một chiếc áo sơ mi trắng."}, {"u": 5, "q": ["What are you looking for?", "Are you looking for comfortable shoes?", "What kind of shoes do you need?"], "a": "I’m looking for a pair of comfortable shoes.", "v": "Tôi đang tìm một đôi giày thoải mái."}, {"u": 5, "q": [], "a": "Where can I find the women’s clothing section?", "v": "Tôi có thể tìm khu quần áo nữ ở đâu?"}, {"u": 5, "q": [], "a": "Where can I find the fitting rooms?", "v": "Tôi có thể tìm phòng thử đồ ở đâu?"}, {"u": 5, "q": [], "a": "Could you help me find this shirt in my size?", "v": "Bạn có thể giúp tôi tìm chiếc áo này đúng kích cỡ của tôi không?"}, {"u": 5, "q": [], "a": "Could you help me find something similar?", "v": "Bạn có thể giúp tôi tìm một món tương tự không?"}, {"u": 5, "q": ["Can I help you find anything?", "Are you looking for something specific?", "Do you need any help?"], "a": "I’m just looking, thanks.", "v": "Tôi chỉ đang xem thôi, cảm ơn."}, {"u": 5, "q": ["Can I help you find anything?", "Are you looking for something specific?", "Do you need any help?"], "a": "I’m just browsing for now.", "v": "Hiện tại tôi chỉ đang xem qua thôi."}, {"u": 5, "q": [], "a": "Do you have this in a medium?", "v": "Bạn có sản phẩm này cỡ vừa không?"}, {"u": 5, "q": [], "a": "Do you have this in black?", "v": "Bạn có sản phẩm này màu đen không?"}, {"u": 5, "q": [], "a": "Do you have another color?", "v": "Bạn có màu khác không?"}, {"u": 5, "q": [], "a": "Do you have another style?", "v": "Bạn có kiểu khác không?"}, {"u": 5, "q": [], "a": "Can I try this on?", "v": "Tôi có thể thử món đồ này không?"}, {"u": 5, "q": [], "a": "Can I try these shoes on?", "v": "Tôi có thể thử đôi giày này không?"}, {"u": 5, "q": ["How does the shirt fit you?", "Does the shirt fit you well?", "Is the shirt the right size for you?"], "a": "It fits me perfectly.", "v": "Nó vừa với tôi một cách hoàn hảo."}, {"u": 5, "q": ["How does the shirt fit you?", "Does the shirt fit you well?", "Is the shirt a good fit for you?"], "a": "It doesn’t fit me very well.", "v": "Nó không vừa với tôi lắm."}, {"u": 5, "q": ["Is it too tight around the waist?", "Is it comfortable around the waist?", "How does it feel around your waist?"], "a": "It’s too tight around the waist.", "v": "Nó quá chật ở phần eo."}, {"u": 5, "q": ["Is it too loose around the shoulders?", "How does it feel around your shoulders?"], "a": "It’s too loose around the shoulders.", "v": "Nó quá rộng ở phần vai."}, {"u": 5, "q": ["Is it too long for you?", "Does it fit you well?"], "a": "It’s too long for me.", "v": "Nó quá dài đối với tôi."}, {"u": 5, "q": [], "a": "Could I try a larger size?", "v": "Tôi có thể thử kích cỡ lớn hơn không?"}, {"u": 5, "q": [], "a": "Could I try a smaller size?", "v": "Tôi có thể thử kích cỡ nhỏ hơn không?"}, {"u": 5, "q": [], "a": "How much is this shirt?", "v": "Chiếc áo này giá bao nhiêu?"}, {"u": 5, "q": [], "a": "How much are these shoes?", "v": "Đôi giày này giá bao nhiêu?"}, {"u": 5, "q": ["Which one will you take?", "What will you take?", "Do you want to take this one?"], "a": "I’ll take this one.", "v": "Tôi sẽ lấy món này."}, {"u": 5, "q": ["Which ones do you want to buy?", "Do you want to take both of them?"], "a": "I’ll take both of them.", "v": "Tôi sẽ lấy cả hai món."}, {"u": 5, "q": ["What kind of products does your dad buy?", "Does your dad buy cheap products or brand-name products?", "Who only buys brand-name products?"], "a": "My dad only buys brand-name products.", "v": "Bố tôi chỉ mua sản phẩm có thương hiệu."}, {"u": 5, "q": ["What kind of products do you buy?", "Do you buy cheap products or brand-name products?", "Who only buys brand-name products?"], "a": "I only buy brand-name shoes.", "v": "Tôi chỉ mua giày có thương hiệu."}, {"u": 5, "q": ["Is this the only place around here that sells local handicrafts?", "Where is the only place around here that sells local handicrafts?"], "a": "This is the only place around here that sells local handicrafts.", "v": "Đây là nơi duy nhất quanh đây bán đồ thủ công mỹ nghệ địa phương."}, {"u": 5, "q": ["Is this the only place around here that sells handmade products?", "Where is the only place around here that sells handmade products?"], "a": "This is the only place around here that sells handmade products.", "v": "Đây là nơi duy nhất quanh đây bán sản phẩm làm thủ công."}, {"u": 5, "q": ["Are these jeans reasonably priced?", "What do you think about the price of these jeans?"], "a": "These jeans are reasonably priced.", "v": "Chiếc quần jean này có giá khá hợp lý."}, {"u": 5, "q": ["Is this product expensive or affordable?", "What do you think about the price of this product?"], "a": "This product is affordable.", "v": "Sản phẩm này có giá phải chăng."}, {"u": 5, "q": [], "a": "Can I pay by card?", "v": "Tôi có thể thanh toán bằng thẻ không?"}, {"u": 5, "q": [], "a": "Can I pay in cash?", "v": "Tôi có thể thanh toán bằng tiền mặt không?"}, {"u": 5, "q": [], "a": "Can I get a receipt, please?", "v": "Cho tôi xin hóa đơn được không?"}, {"u": 5, "q": [], "a": "Can I get a bag, please?", "v": "Cho tôi xin một chiếc túi được không?"}, {"u": 5, "q": ["Do you want to exchange this shirt for a larger size?", "What would you like to do with this shirt?"], "a": "I’d like to exchange this shirt for a larger size.", "v": "Tôi muốn đổi chiếc áo này sang kích cỡ lớn hơn."}, {"u": 5, "q": ["Do you want to exchange this for a different color?", "What would you like to do with this item?"], "a": "I’d like to exchange this for a different color.", "v": "Tôi muốn đổi sản phẩm này sang màu khác."}, {"u": 6, "q": ["Do you want to book a table for two tonight?", "How many people do you want to book a table for?", "When do you want to book a table?"], "a": "I'd like to book a table for two tonight.", "v": "Tôi muốn đặt bàn cho hai người tối nay."}, {"u": 6, "q": ["Do you want to make a reservation for four at seven?", "How many people would you like to make a reservation for?", "What time would you like to make a reservation?"], "a": "I'd like to make a reservation for four at seven.", "v": "Tôi muốn đặt bàn cho bốn người lúc 7 giờ."}, {"u": 6, "q": ["Would you like a quieter table?", "Where would you like to sit?"], "a": "Could we sit by the window?", "v": "Chúng tôi có thể ngồi cạnh cửa sổ không?"}, {"u": 6, "q": ["Would you like a quieter table?", "Where would you like to sit?"], "a": "Could we sit somewhere quieter?", "v": "Chúng tôi có thể ngồi ở nơi yên tĩnh hơn không?"}, {"u": 6, "q": [], "a": "Could we see the menu, please?", "v": "Cho chúng tôi xem thực đơn được không?"}, {"u": 6, "q": [], "a": "Could we have a drinks menu as well?", "v": "Cho chúng tôi xin thêm thực đơn đồ uống được không?"}, {"u": 6, "q": [], "a": "What do you recommend?", "v": "Bạn gợi ý món nào?"}, {"u": 6, "q": [], "a": "What would you recommend for someone who doesn't eat spicy food?", "v": "Bạn gợi ý món nào cho người không ăn cay?"}, {"u": 6, "q": [], "a": "What's in this dish?", "v": "Món này có những gì?"}, {"u": 6, "q": [], "a": "Does this contain peanuts?", "v": "Món này có chứa đậu phộng không?"}, {"u": 6, "q": ["Do you want to order the grilled chicken?", "What dish would you like to order?", "Would you like grilled chicken or fried chicken?"], "a": "I'd like the grilled chicken, please.", "v": "Tôi muốn gọi món gà nướng."}, {"u": 6, "q": ["Do you want to have the beef noodles?", "What noodle dish will you have?", "Will you have beef noodles or chicken noodles?"], "a": "I'll have the beef noodles.", "v": "Tôi sẽ gọi mì bò."}, {"u": 6, "q": [], "a": "Can I have this without onions?", "v": "Tôi có thể gọi món này không có hành không?"}, {"u": 6, "q": [], "a": "Can I get this without cheese?", "v": "Tôi có thể gọi món này không có phô mai không?"}, {"u": 6, "q": ["Are you allergic to peanuts?", "Why can't you eat peanuts?", "What food allergy do you have?"], "a": "I'm allergic to peanuts.", "v": "Tôi bị dị ứng với đậu phộng."}, {"u": 6, "q": ["Are you allergic to shellfish?", "Why can't you eat shellfish?", "What food allergy do you have?"], "a": "I'm allergic to shellfish.", "v": "Tôi bị dị ứng với động vật có vỏ."}, {"u": 6, "q": ["How is the food?", "Do you like this dish?"], "a": "This is delicious.", "v": "Món này rất ngon."}, {"u": 6, "q": ["How does the food taste?", "Is the food fresh?"], "a": "It tastes really fresh.", "v": "Món này có vị rất tươi ngon."}, {"u": 6, "q": ["Is the chicken tender?", "How is the chicken?", "Is the chicken full of flavor?"], "a": "The chicken is tender and full of flavor.", "v": "Thịt gà mềm và rất đậm đà."}, {"u": 6, "q": ["Is it too spicy for you?", "Why can't you eat this dish?", "How is the dish for you?"], "a": "It's too spicy for me.", "v": "Món này quá cay đối với tôi."}, {"u": 6, "q": ["Is the soup too salty?", "How is the soup?", "Why don't you like the soup?"], "a": "The soup is too salty.", "v": "Món súp quá mặn."}, {"u": 6, "q": ["Did you order this dish?", "What is wrong with your order?"], "a": "I think this isn't what I ordered.", "v": "Tôi nghĩ đây không phải món tôi đã gọi."}, {"u": 6, "q": ["Did you all order this dish?", "What is wrong with your table's order?"], "a": "I think this isn't what we ordered.", "v": "Tôi nghĩ đây không phải món chúng tôi đã gọi."}, {"u": 6, "q": [], "a": "Could you warm this up, please?", "v": "Bạn có thể hâm nóng món này giúp tôi không?"}, {"u": 6, "q": [], "a": "Could you replace this, please?", "v": "Bạn có thể đổi món này giúp tôi không?"}, {"u": 6, "q": [], "a": "Can I get this to go?", "v": "Tôi có thể đóng gói món này mang về không?"}, {"u": 6, "q": [], "a": "Could you pack this up for me?", "v": "Bạn có thể đóng gói món này giúp tôi không?"}, {"u": 6, "q": [], "a": "Could we get the check, please?", "v": "Cho chúng tôi xin hóa đơn được không?"}, {"u": 6, "q": [], "a": "Could I have the bill, please?", "v": "Cho tôi xin hóa đơn được không?"}, {"u": 6, "q": [], "a": "Can we split the check?", "v": "Chúng tôi có thể chia hóa đơn không?"}, {"u": 6, "q": [], "a": "Can we pay separately?", "v": "Chúng tôi có thể thanh toán riêng không?"}, {"u": 6, "q": ["How do you want to pay?"], "a": "Can I pay by card?", "v": "Tôi có thể thanh toán bằng thẻ không?"}, {"u": 6, "q": ["How do you want to pay?"], "a": "Can I pay in cash?", "v": "Tôi có thể thanh toán bằng tiền mặt không?"}, {"u": 7, "q": ["Are you surprised by his behavior?", "How do you feel about someone acting like that?", "What do you say when you can't understand someone's actions?"], "a": "How could anyone be like that?", "v": "Sao lại có kiểu người như thế nhỉ?"}, {"u": 7, "q": ["Are you sick and tired of his whining?", "What do you say to someone who keeps complaining?", "Do you want them to stop whining?"], "a": "I’m sick and tired of your whining.", "v": "Tôi chán việc phải nghe bạn rên rỉ rồi nhé."}, {"u": 7, "q": ["How do you feel after making a mistake in public?", "Are you embarrassed about what happened?", "Do you feel shy or embarrassed right now?"], "a": "I’m so embarrassed.", "v": "Tôi xấu hổ ghê."}, {"u": 7, "q": ["How would you feel if you were in his position?", "Would you be embarrassed if that happened to you?", "What would you feel in his situation?"], "a": "If I were in his position, I’d be so embarrassed.", "v": "Nếu tôi mà ở vị trí của nó, tôi xấu hổ chết được."}, {"u": 7, "q": ["Do you miss your school years?", "Do you wish you could go back to your school days?", "What time in your life do you wish to go back to?"], "a": "I wish I could go back to my school years.", "v": "Tôi muốn quay về thời còn đi học ghê."}, {"u": 7, "q": ["Why are you obsessing over the past?", "Is there any point in regretting the past now?", "What do you say to someone worrying about past mistakes?"], "a": "What’s the use of obsessing over the past and regretting it now?", "v": "Ám ảnh và hối hận về quá khứ thì có ích gì?"}, {"u": 7, "q": ["Are you on my side or his side?", "Do you support my decision?", "Whose side are you on?"], "a": "I’m totally on your side.", "v": "Tôi hoàn toàn đứng về phía bạn."}, {"u": 7, "q": ["Do you agree with me completely?", "What do you say when you strongly agree with someone?", "Do you already know how hard this is?"], "a": "You’re telling me.", "v": "Ý tôi cũng là thế đó. / Chuẩn luôn đó."}, {"u": 7, "q": ["Did you receive my message?", "Did you check your phone for my text?", "Did you get my text message this morning?"], "a": "Did you get my text message?", "v": "Bạn nhận tin nhắn của tôi chưa vậy?"}, {"u": 7, "q": ["Were you about to send me a message?", "What were you just about to do when I messaged you?", "Were you going to text me right now?"], "a": "I was just about to text you.", "v": "Tôi cũng định nhắn tin cho bạn đấy."}, {"u": 7, "q": ["Why shouldn't I send the photo through Zalo?", "Will sending photos on Zalo ruin the quality?", "What app should I avoid for sending high-quality photos?"], "a": "Don’t send the photo through Zalo. It’ll ruin the quality.", "v": "Đừng gửi ảnh qua Zalo, nó làm vỡ ảnh / giảm chất lượng ảnh đấy."}, {"u": 7, "q": ["Did you get my messages?", "Why didn't you reply to me?", "Did you check your inbox today?"], "a": "I didn’t get any messages from you.", "v": "Tôi có nhận được tin nhắn nào của bạn đâu."}, {"u": 7, "q": [], "a": "Who doesn’t use a smartphone nowadays?", "v": "Dạo này làm gì còn ai không dùng điện thoại thông minh đâu?"}, {"u": 7, "q": ["Did you stay indoors all day today?", "Why are you so bored today?", "Were you cooped up at home all weekend?"], "a": "I was cooped up at home all day.", "v": "Tôi chỉ ru rú ở nhà cả ngày."}, {"u": 7, "q": [], "a": "Where are you going?", "v": "Bạn định đi đâu thế?"}, {"u": 7, "q": [], "a": "How was your trip?", "v": "Chuyến du lịch của cậu thế nào?"}, {"u": 7, "q": [], "a": "Why are you goofing around like that? Go find something to do.", "v": "Sao cậu phí hoài thời gian thế? Tìm việc gì mà làm đi chứ."}, {"u": 7, "q": ["What are you going to do this weekend?", "Are you going to sleep a lot this weekend?", "How will you rest after a long working week?"], "a": "I’m going to catch up on my sleep this weekend.", "v": "Tôi sẽ ngủ bù vào cuối tuần này."}, {"u": 7, "q": [], "a": "What time works best for you?", "v": "Mấy giờ thì tiện cho bạn nhất?"}, {"u": 7, "q": [], "a": "How about meeting at seven on Saturday? I’m free then.", "v": "Gặp nhau lúc 7 giờ vào thứ Bảy thì sao? Lúc đó tôi rảnh."}, {"u": 7, "q": ["Will you be free or busy this month?", "Can we meet sometime this month?", "Why can't you travel with us this month?"], "a": "I think I’ll be tied up this month.", "v": "Tôi nghĩ tháng này mình sẽ bận tối mặt."}, {"u": 7, "q": ["Where should we meet for coffee?", "Is it better to choose a location near your house?", "Where is the most convenient place to meet?"], "a": "I think it’d be best to pick a place near your house.", "v": "Tôi nghĩ mình cứ chọn chỗ nào gần nhà bạn là tiện nhất."}, {"u": 7, "q": ["When will you have more free time?", "Will you be less busy the day after tomorrow?", "Can we talk the day after tomorrow?"], "a": "I’ll have more free time the day after tomorrow.", "v": "Ngày kia tôi sẽ rảnh hơn."}, {"u": 7, "q": ["Why do you feel so tired and awful today?", "Did you stay up all night to work?", "How do you feel after pulling an all-nighter?"], "a": "I feel awful because I stayed up all night finishing my report.", "v": "Mình rất mệt vì đã thức cả đêm để hoàn thành báo cáo."}, {"u": 7, "q": ["Are you feeling sick today?", "What illness do you think you are getting?", "Why are you coughing and sneezing?"], "a": "I think I’m coming down with the flu.", "v": "Mình nghĩ mình bị cảm rồi."}, {"u": 7, "q": ["Are you still feeling sick?", "Do you wonder when you will recover?", "How long have you been feeling unwell?"], "a": "I wonder when I’ll start feeling better.", "v": "Không biết khi nào mình mới khỏe lại đây."}, {"u": 7, "q": ["Did that sad story affect you?", "How did her words make you feel?", "Did it get to you emotional-wise?"], "a": "It really got to me.", "v": "Chuyện đó làm tôi rất bực / rất khó chịu."}, {"u": 7, "q": ["What do you say when you don't care anymore?", "Do you want to continue arguing about this?", "Are you annoyed with this conversation?"], "a": "Whatever.", "v": "Sao cũng được."}, {"u": 7, "q": ["Do you care about other people's opinions?", "What do you say when you ignore everyone's rumors?", "Should we worry about what people say?"], "a": "To hell with what everyone says.", "v": "Mặc kệ ai thích nói gì thì nói."}, {"u": 7, "q": ["Why did you act like that?", "What question do you ask when someone does something stupid?", "Did you have a good reason to do that?"], "a": "Why would you do that?", "v": "Sao bạn lại làm vậy?"}];
+const $=s=>document.querySelector(s);
+const LS={get(k,d){try{const v=localStorage.getItem('px57.'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('px57.'+k,JSON.stringify(v))}catch(e){}}};
+const UA=navigator.userAgent;
+const IS_MOBILE=/Android|iPhone|iPad|iPod/i.test(UA)||(navigator.maxTouchPoints>1&&/Macintosh/.test(UA));
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+DATA.forEach(d=>d.k=d.u+'|'+d.a);
+const QMAP={};DATA.forEach(d=>d.q.forEach(q=>{const k=q.toLowerCase();(QMAP[k]=QMAP[k]||[]).push(d)}));
+// answers accepted for this prompt: the target first, then other answers that share the same question
+function answersFor(d,p){if(p.ask)return[d];const list=QMAP[p.text.toLowerCase()]||[];return[d,...list.filter(x=>x!==d&&x.a!==d.a)]}
+const UNITS=[...new Set(DATA.map(d=>d.u))].sort((a,b)=>a-b);
+const savedCfg=LS.get('cfg',{});if(!savedCfg.ver&&savedCfg.wait===3)delete savedCfg.wait;
+const cfg=Object.assign({wait:5,rate:0.95,thr:85,show:true,auto:false,delay:4},savedCfg,{ver:2});
+let sel=LS.get('units',UNITS).filter(u=>UNITS.includes(u)); if(!sel.length)sel=UNITS.slice();
+let wrong=new Set(LS.get('wrong',[])), known=new Set(LS.get('known',[]));
+let fdir=LS.get('fdir','vi'), dord=LS.get('dord','rand');
+const save=()=>{LS.set('cfg',cfg);LS.set('units',sel);LS.set('wrong',[...wrong]);LS.set('known',[...known]);LS.set('fdir',fdir);LS.set('dord',dord)};
+const pool=()=>DATA.filter(d=>sel.includes(d.u));
+
+/* ---------- screens ---------- */
+function show(id){document.querySelectorAll('section').forEach(s=>s.hidden=s.id!==id);window.scrollTo(0,0)}
+document.querySelectorAll('[data-home]').forEach(b=>b.onclick=goHome);
+function goHome(){stopAll();releaseWake();renderHome();show('home')}
+
+/* ---------- speech synthesis ---------- */
+let VOICES=[],VOICE={};
+function loadVoices(){return new Promise(res=>{
+  if(!('speechSynthesis' in window))return res();
+  const got=()=>{VOICES=speechSynthesis.getVoices();if(VOICES.length){VOICE.en=pickVoice('en');VOICE.vi=pickVoice('vi')}return VOICES.length};
+  if(got())return res();
+  const t=setTimeout(()=>{got();res()},2500);
+  speechSynthesis.addEventListener('voiceschanged',()=>{if(got()){clearTimeout(t);res()}});
+})}
+function pickVoice(lang){
+  const pref=lang==='vi'?['HoaiMy','Hoai My','Google Tiếng Việt','Linh','NamMinh']:['Google US English','Aria','Jenny','Ava','Samantha','Zira','Google UK English Female'];
+  const pool=VOICES.filter(v=>v.lang.replace('_','-').toLowerCase().startsWith(lang));
+  for(const p of pref){const v=pool.find(v=>v.name.includes(p));if(v)return v}
+  return pool.find(v=>/en-us|vi-vn/i.test(v.lang.replace('_','-')))||pool[0]||null;
+}
+function speak(text,lang='en',mul=1){return new Promise(res=>{
+  if(!('speechSynthesis' in window))return res();
+  const s=speechSynthesis;s.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=lang==='vi'?'vi-VN':'en-US';const v=VOICE[lang];if(v)u.voice=v;
+  u.rate=Math.max(.5,cfg.rate*mul);
+  let done=false;const fin=()=>{if(done)return;done=true;clearTimeout(t);res()};
+  u.onend=fin;u.onerror=fin;
+  const t=setTimeout(fin,2500+text.length*120/u.rate);
+  setTimeout(()=>{if(!done)s.speak(u)},60);
+})}
+let AC=null;
+function unlockAudio(){
+  try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume()}catch(e){}
+  try{if('speechSynthesis' in window){const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u)}}catch(e){}
+}
+function beep(){return new Promise(r=>{
+  try{const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.frequency.value=880;
+    g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.3,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.15);
+    o.connect(g).connect(AC.destination);o.start(t);o.stop(t+.17)}catch(e){}
+  setTimeout(r,200);
+})}
+let wake=null;
+async function holdWake(){try{wake=await navigator.wakeLock.request('screen')}catch(e){}}
+function releaseWake(){try{wake&&wake.release()}catch(e){}wake=null}
+
+/* ---------- scoring ---------- */
+const NUMW=['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
+function normWord(w){
+  w=w.toLowerCase().replace(/[’‘`´]/g,"'").replace(/[^a-z0-9'\-]/g,'');
+  if(!w)return[];
+  w=w.replace(/^can't$/,'can not').replace(/^cannot$/,'can not').replace(/^won't$/,'will not')
+     .replace(/n't$/,' not').replace(/^i'm$/,'i am').replace(/'re$/,' are').replace(/'ve$/,' have')
+     .replace(/'ll$/,' will').replace(/'d$/,' would')
+     .replace(/^its$/,'it is').replace(/^(it|that|what|there|he|she|where|who|how|here|this)'s$/,'$1 is').replace(/'s$/,'').replace(/'/g,'');
+  return w.split(/[\s\-]+/).filter(Boolean).map(t=>/^\d+$/.test(t)&&+t<=20?NUMW[+t]:t);
+}
+const splitWords=s=>String(s).replace(/(\d):(\d\d)/g,'$1 $2').split(/\s+/).filter(Boolean);
+const toks=s=>splitWords(s).flatMap(normWord);
+function near(a,b){
+  if(Math.abs(a.length-b.length)>1)return false;
+  let i=0,j=0,e=0;
+  while(i<a.length&&j<b.length){if(a[i]===b[j]){i++;j++;continue}if(++e>1)return false;if(a.length>b.length)i++;else if(b.length>a.length)j++;else{i++;j++}}
+  return e+(a.length-i)+(b.length-j)<=1;
+}
+const same=(a,b)=>a===b||(a.length>=4&&b.length>=4&&near(a,b));
+function analyze(target,spoken){
+  const words=splitWords(target),T=[],own=[];
+  words.forEach((w,i)=>normWord(w).forEach(t=>{T.push(t);own.push(i)}));
+  const S0=toks(spoken),S=[];
+  for(let k=0;k<S0.length;k++){if(k+1<S0.length&&T.includes(S0[k]+S0[k+1])&&!T.includes(S0[k])){S.push(S0[k]+S0[k+1]);k++}else S.push(S0[k])}
+  const n=T.length,m=S.length;
+  const dp=Array.from({length:n+1},()=>new Array(m+1).fill(0));
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)dp[i][j]=same(T[i],S[j])?dp[i+1][j+1]+1:Math.max(dp[i+1][j],dp[i][j+1]);
+  const hit=new Array(n).fill(false);let i=0,j=0;
+  while(i<n&&j<m){if(same(T[i],S[j])&&dp[i][j]===dp[i+1][j+1]+1){hit[i]=true;i++;j++}else if(dp[i+1][j]>=dp[i][j+1])i++;else j++}
+  const okW=words.map(()=>true);own.forEach((w,k)=>{if(!hit[k])okW[w]=false});
+  const score=n?Math.round(hit.filter(Boolean).length/n*100):0;
+  return{score,spoken,endHit:n?hit[n-1]:false,html:words.map((w,k)=>okW[k]?esc(w):'<span class="m">'+esc(w)+'</span>').join(' ')};
+}
+
+/* ---------- speech recognition ---------- */
+let REC=null;
+function cdShow(n){const e=$('#micN');e.hidden=false;e.textContent=n}
+function cdHide(){$('#micN').hidden=true}
+function setMic(cls,icon,status){$('#mic').className='mic '+cls;$('#micI').textContent=icon;$('#dStatus').textContent=status}
+function cands(R){
+  if(!R||!R.length)return[];
+  const arr=Array.from(R),pre=arr.slice(0,-1).map(r=>r[0].transcript).join(' ');
+  return Array.from(arr[arr.length-1]).map(a=>(pre+' '+a.transcript).trim()).filter(Boolean);
+}
+function listen(ui,targets){if(!Array.isArray(targets))targets=[targets];return new Promise(resolve=>{
+  let rec;try{rec=new SR()}catch(e){return resolve({err:'unsupported',cands:[]})}
+  REC=rec;rec.lang='en-US';rec.interimResults=true;rec.maxAlternatives=3;rec.continuous=!IS_MOBILE;
+  let armed=false,spoke=false,timedOut=false,ended=false,stopping=false,err=null,last=null,acc='',deadline=0,restarts=0;const T={};
+  const clr=()=>{for(const k in T){clearTimeout(T[k]);clearInterval(T[k])}};
+  // everything heard so far = text kept from earlier listening rounds + current round
+  const all=()=>{const c=cands(last);if(!c.length)return acc?[acc]:[];return c.map(x=>(acc+' '+x).trim())};
+  const bestOf=list=>{let b=null,bs=-1;for(const c of list)for(const t of targets){const sc=analyze(t,c).score;if(sc>bs){bs=sc;b=c}}return b};
+  const complete=()=>all().some(x=>targets.some(t=>{const r=analyze(t,x);return r.score>=cfg.thr&&r.endHit}));
+  const finish=()=>{if(ended)return;ended=true;clr();if(REC===rec)REC=null;ui.cd(0);
+    const c=all();resolve({err,spoke,timedOut:timedOut||(!c.length&&!err),cands:c})};
+  const stopSoon=()=>{if(stopping||ended)return;stopping=true;try{rec.stop()}catch(e){}clearTimeout(T.f);T.f=setTimeout(finish,1500)};
+  const arm=()=>{if(armed||ended)return;armed=true;deadline=Date.now()+cfg.wait*1000;
+    if(!spoke){ui.armed();let left=cfg.wait;ui.cd(left);T.cd=setInterval(()=>{left--;if(left>0&&!spoke)ui.cd(left)},1000)}
+    T.start=setTimeout(()=>{if(!spoke){timedOut=true;stopping=true;try{rec.abort()}catch(e){}T.f=setTimeout(finish,700)}},cfg.wait*1000)};
+  // smart end: sentence already complete -> stop after 1s of silence; otherwise wait up to 4s
+  const heard=()=>{if(!spoke){spoke=true;clearTimeout(T.start);clearInterval(T.cd);ui.cd(0);ui.speaking()}
+    clearTimeout(T.sil);T.sil=setTimeout(stopSoon,complete()?1000:4000)};
+  rec.onstart=()=>{if(!armed)T.arm=setTimeout(arm,1000)};
+  rec.onaudiostart=()=>{clearTimeout(T.arm);arm()};
+  rec.onspeechstart=()=>{if(!ended)heard()};
+  rec.onresult=e=>{if(ended)return;last=e.results;heard();ui.text(all()[0]||'')};
+  rec.onerror=e=>{if(e.error!=='aborted'&&e.error!=='no-speech')err=e.error};
+  rec.onend=()=>{
+    if(ended)return;
+    // the browser ended listening by itself (common on phones after a short pause): keep what we have and listen again
+    if(!stopping&&!timedOut&&!err&&restarts<20){
+      const waitingToStart=!spoke&&armed&&Date.now()<deadline-300;
+      if(waitingToStart||(spoke&&!complete())){
+        if(last){const b=bestOf(all());if(b)acc=b;last=null}
+        restarts++;
+        setTimeout(()=>{if(ended)return;try{rec.start()}catch(e){finish()}},80);
+        return;
+      }
+    }
+    finish()};
+  T.cap=setTimeout(stopSoon,30000);
+  try{rec.start()}catch(e){err='start-failed';finish()}
+})}
+function stopAll(){
+  D.tok++;
+  try{speechSynthesis.cancel()}catch(e){}
+  if(REC){try{REC.abort()}catch(e){}REC=null}
+}
+
+/* ---------- HOME ---------- */
+function renderHome(){
+  $('#total').textContent=DATA.length;
+  $('#units').innerHTML=UNITS.map(u=>`<button class="chip${sel.includes(u)?' on':''}" data-u="${u}">Unit ${u} (${DATA.filter(d=>d.u===u).length})</button>`).join('')
+    +`<button class="chip${sel.length===UNITS.length?' on':''}" data-u="all">Tất cả</button>`;
+  document.querySelectorAll('#units .chip').forEach(b=>b.onclick=()=>{
+    const u=b.dataset.u;
+    if(u==='all')sel=sel.length===UNITS.length?[UNITS[0]]:UNITS.slice();
+    else{const n=+u;sel=sel.includes(n)?sel.filter(x=>x!==n):[...sel,n].sort((a,b)=>a-b);if(!sel.length)sel=[n]}
+    save();renderHome()});
+  segSet('#fdir',fdir);segSet('#dord',dord);
+  $('#waitTxt').textContent=cfg.wait;
+  $('#knownN').textContent=pool().filter(d=>known.has(d.k)).length;
+  const w=pool().filter(d=>wrong.has(d.k)).length;
+  $('#goWrong').hidden=!w;$('#goWrong').textContent=`Luyện các câu đang sai (${w})`;
+  const warn=[];
+  if(!SR)warn.push('Trình duyệt này không nhận được giọng nói, nên phần luyện nói sẽ chuyển sang <b>tự chấm</b>. Nên dùng <b>Chrome</b> hoặc <b>Edge</b>.');
+  if(location.protocol==='file:')warn.push('Bạn đang mở file trực tiếp trên máy. Micro có thể không chạy, hãy mở bằng link GitHub Pages.');
+  $('#warn').hidden=!warn.length;$('#warn').innerHTML=warn.join('<br>');
+}
+function segSet(id,v){document.querySelectorAll(id+' button').forEach(b=>b.classList.toggle('on',b.dataset.v===v))}
+document.querySelectorAll('#fdir button').forEach(b=>b.onclick=()=>{fdir=b.dataset.v;save();segSet('#fdir',fdir)});
+document.querySelectorAll('#dord button').forEach(b=>b.onclick=()=>{dord=b.dataset.v;save();segSet('#dord',dord)});
+
+/* ---------- FLASHCARDS ---------- */
+const F={q:[],total:0,done:0,flip:false};
+$('#goFlash').onclick=()=>{unlockAudio();startFlash()};
+$('#fAgain').onclick=()=>{$('#fhide').checked=false;startFlash()};
+function startFlash(){
+  let items=pool();if($('#fhide').checked)items=items.filter(d=>!known.has(d.k));
+  if(!items.length){alert('Bạn đã thuộc hết các thẻ của unit đã chọn. Bỏ chọn "Ẩn thẻ đã thuộc" để học lại.');return}
+  if($('#fshuf').checked)items=shuffle(items);
+  F.q=items;F.total=items.length;F.done=0;F.flip=false;show('flash');renderFlash(true);
+}
+const enShown=()=>(fdir==='en')!==F.flip;
+function renderFlash(auto){
+  if(!F.q.length){$('#fdoneTxt').textContent=`Bạn đã thuộc ${F.total} thẻ.`;show('fdone');return}
+  const d=F.q[0],isAsk=!d.q.length;
+  $('#fProg').textContent=`Đã thuộc ${F.done}/${F.total}`;$('#fBar').style.width=(F.done/F.total*100)+'%';
+  const tags=`<div><span class="tag u">Unit ${d.u}</span><span class="tag${isAsk?' ask':''}">${isAsk?'🗣 Bạn hỏi':'💬 Bạn trả lời'}</span></div>`;
+  let h;
+  if(!F.flip){h=tags+`<div class="big">${esc(fdir==='vi'?d.v:d.a)}</div><div class="small">Chạm để lật</div>`}
+  else{h=tags+`<div class="big">${esc(fdir==='vi'?d.a:d.v)}</div><div class="small">${esc(fdir==='vi'?d.v:d.a)}</div>`
+    +(d.q.length?`<div class="qs"><b>Câu hỏi có thể gặp:</b>${d.q.map(q=>'<div>• '+esc(q)+'</div>').join('')}</div>`:'')}
+  $('#fCard').innerHTML=h;
+  if(auto&&enShown())speak(d.a);
+}
+$('#fCard').onclick=()=>{F.flip=!F.flip;renderFlash(true)};
+$('#fSay').onclick=()=>F.q[0]&&speak(F.q[0].a);
+$('#fSlow').onclick=()=>F.q[0]&&speak(F.q[0].a,'en',.7);
+function fKnow(){const d=F.q.shift();if(!d)return;known.add(d.k);save();F.done++;F.flip=false;renderFlash(true)}
+function fNot(){const d=F.q.shift();if(!d)return;known.delete(d.k);save();F.q.push(d);F.flip=false;renderFlash(true)}
+$('#fYes').onclick=fKnow;$('#fNo').onclick=fNot;
+document.addEventListener('keydown',e=>{
+  if($('#flash').hidden)return;
+  if(e.code==='Space'){e.preventDefault();F.flip=!F.flip;renderFlash(true)}
+  else if(e.key==='ArrowRight')fKnow();else if(e.key==='ArrowLeft')fNot();
+});
+
+/* ---------- DRILL ---------- */
+const D={q:[],i:0,res:[],tok:0,paused:false,graded:false,manual:false};
+$('#goDrill').onclick=()=>startDrill(pool());
+$('#goWrong').onclick=()=>startDrill(pool().filter(d=>wrong.has(d.k)));
+async function startDrill(items){
+  unlockAudio();
+  if(!items.length)return;
+  if(dord==='rand')items=shuffle(items);else items=items.slice().sort((a,b)=>a.u-b.u);
+  Object.assign(D,{q:items,i:0,res:new Array(items.length).fill(undefined),paused:false,manual:!SR});
+  show('drill');holdWake();
+  if(!VOICES.length)await loadVoices();
+  runItem();
+}
+function promptOf(d){
+  if(d.q.length)return{text:d.q[Math.floor(Math.random()*d.q.length)],lang:'en',ask:false};
+  return{text:d.v,lang:'vi',ask:true};
+}
+function drillHeader(){
+  const ok=D.res.filter(r=>r===true).length,done=D.res.filter(r=>r!==undefined).length;
+  $('#dProg').textContent=`Câu ${D.i+1}/${D.q.length} · ✅ ${ok}/${done}`;
+  $('#dBar').style.width=(D.i/D.q.length*100)+'%';
+}
+const UI={
+  cd:n=>n?cdShow(n):cdHide(),
+  armed:()=>setMic('listen','🎤','Nói đi!'),
+  speaking:()=>setMic('speak','🗣','Đang nghe…'),
+  text:t=>{$('#heard').textContent=t},
+};
+async function runItem(){
+  const tok=++D.tok,stale=()=>tok!==D.tok;
+  const d=D.q[D.i],p=promptOf(d);
+  D.graded=false;D.paused=false;$('#dPause').textContent='⏸';
+  drillHeader();
+  $('#dUnit').textContent='Unit '+d.u;
+  $('#dType').className='tag'+(p.ask?' ask':'');
+  $('#dType').textContent=p.ask?'🗣 Bạn hỏi: nói câu tiếng Anh':'💬 Trả lời câu hỏi';
+  const pe=$('#dPrompt');
+  if(cfg.show){pe.className='prompt';pe.textContent=p.text}else{pe.className='prompt hid';pe.textContent='(Nghe câu hỏi)'}
+  $('#dRes').hidden=true;$('#manualBtns').hidden=true;$('#goNext').hidden=true;$('#heard').textContent='';cdHide();
+  setMic('','🔊','Đang đọc câu hỏi…');
+  await speak(p.text,p.lang);if(stale())return;
+  if(D.manual)return runManual(tok,d);
+  await beep();if(stale())return;
+  setMic('listen','🎤','Chuẩn bị…');
+  const acc=answersFor(d,p);
+  const r=await listen(UI,acc.map(x=>x.a));if(stale())return;
+  if(r.err&&!r.cands.length){
+    D.manual=true;
+    $('#warn').hidden=false;
+    $('#dStatus').textContent=r.err==='not-allowed'||r.err==='service-not-allowed'?'Chưa được cấp quyền micro → chuyển sang tự chấm.':'Micro gặp lỗi ('+r.err+') → chuyển sang tự chấm.';
+    await sleep(1500);if(stale())return;
+    return runManual(tok,d);
+  }
+  let best=null,own=null;
+  for(const c of r.cands)for(const x of acc){const a=analyze(x.a,c);a.item=x;
+    if(!best||a.score>best.score||(a.score===best.score&&x===d))best=a;
+    if(x===d&&(!own||a.score>own.score))own=a}
+  const pass=!!best&&best.score>=cfg.thr;
+  if(!pass)best=own;
+  const shown=best?best.item:d,others=acc.filter(x=>x!==shown).map(x=>x.a);
+  grade(d,pass);
+  setMic('',pass?'✅':(r.timedOut&&!r.cands.length?'⏱':'❌'),'');
+  let verdict;
+  if(pass)verdict=shown===d?`✅ Đúng rồi! (${best.score}%)`:`✅ Cũng đúng! (${best.score}%)`;
+  else if(!r.cands.length)verdict=r.spoke?'❓ Máy chưa nghe rõ, thử lại nhé':`⏱ Hết ${cfg.wait} giây`;
+  else verdict=`❌ Chưa đúng (${best.score}%)`;
+  showResult(pass?'ok':'bad',verdict,best?best.html:esc(d.a),shown.v,best?best.spoken:'',others);
+  $('#goNext').hidden=false;
+  await speak(shown.a);if(stale())return;
+  if(!cfg.auto){$('#dStatus').textContent='Bấm "Câu tiếp" khi bạn sẵn sàng';return}
+  const wait=cfg.delay+(pass?0:2);
+  $('#dStatus').textContent=`Tự chuyển câu sau ${wait} giây…`;
+  await sleep(wait*1000);if(stale()||D.paused)return;
+  nextItem();
+}
+function showResult(cls,verdict,ansHtml,vi,said,others){
+  const r=$('#dRes');r.hidden=false;r.className='result '+cls;
+  r.innerHTML=`<div class="verdict">${verdict}</div><div class="ans">${ansHtml}</div><div class="vi">${esc(vi)}</div>`
+    +(said?`<div class="said">Bạn nói: <i>${esc(said)}</i></div>`:'')
+    +(others&&others.length?`<div class="said">Cách nói khác: ${others.map(esc).join(' · ')}</div>`:'');
+  $('#heard').textContent='';
+}
+async function runManual(tok,d){
+  const stale=()=>tok!==D.tok;
+  setMic('listen','💭','Nói to câu trả lời của bạn…');
+  for(let left=cfg.wait;left>0;left--){cdShow(left);await sleep(1000);if(stale())return}
+  cdHide();setMic('','👂','Tự chấm: bạn nói đúng không?');
+  showResult('neu','Câu mẫu',esc(d.a),d.v,'');
+  $('#manualBtns').hidden=false;
+  await speak(d.a);
+}
+function manualGrade(pass){
+  $('#manualBtns').hidden=true;grade(D.q[D.i],pass);
+  $('#dRes').className='result '+(pass?'ok':'bad');
+  nextItem();
+}
+$('#goNext').onclick=()=>nextItem();
+$('#mYes').onclick=()=>manualGrade(true);$('#mNo').onclick=()=>manualGrade(false);
+function grade(d,pass){
+  D.res[D.i]=pass;D.graded=true;
+  if(pass)wrong.delete(d.k);else wrong.add(d.k);
+  save();drillHeader();
+}
+function nextItem(){stopAll();D.i++;if(D.i>=D.q.length)return summary();runItem()}
+$('#dNext').onclick=()=>{if(!D.graded)D.res[D.i]=null;nextItem()};
+$('#dRedo').onclick=()=>{stopAll();runItem()};
+$('#dPause').onclick=()=>{
+  if(!D.paused){stopAll();D.paused=true;$('#dPause').textContent='▶';cdHide();setMic('','⏸','Đã tạm dừng. Bấm ▶ để tiếp tục.')}
+  else{D.paused=false;$('#dPause').textContent='⏸';D.graded?nextItem():runItem()}
+};
+document.addEventListener('keydown',e=>{
+  if($('#drill').hidden||$('#goNext').hidden)return;
+  if(e.key==='Enter'||e.code==='Space'){e.preventDefault();nextItem()}
+});
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden&&!$('#drill').hidden&&!D.paused)$('#dPause').click();
+  if(!document.hidden&&!$('#drill').hidden)holdWake();
+});
+
+/* ---------- SUMMARY ---------- */
+function summary(){
+  releaseWake();
+  const ok=D.res.filter(r=>r===true).length,n=D.q.length;
+  $('#sScore').textContent=`${ok}/${n}`;
+  const bad=D.q.filter((d,i)=>D.res[i]!==true);
+  $('#sTxt').textContent=bad.length?`Còn ${bad.length} câu cần luyện thêm.`:'Tuyệt vời, bạn đúng hết!';
+  $('#sWrong').hidden=!bad.length;
+  $('#sList').hidden=!bad.length;
+  $('#sList').innerHTML='<div class="lbl">Câu cần luyện lại</div>'+bad.map(d=>`<div class="it"><div class="en">${esc(d.a)}</div><div class="v">Unit ${d.u} · ${esc(d.v)}</div></div>`).join('');
+  $('#sWrong').onclick=()=>startDrill(bad);
+  $('#sAll').onclick=()=>startDrill(D.q.slice());
+  show('sum');
+}
+
+/* ---------- SETTINGS ---------- */
+$('#goSet').onclick=()=>{renderSet();show('settings')};
+function renderSet(){
+  $('#sWait').value=cfg.wait;$('#sWaitV').textContent=cfg.wait+' giây';
+  $('#sRate').value=cfg.rate;$('#sRateV').textContent=Math.round(cfg.rate*100)+'%';
+  $('#sThr').value=cfg.thr;$('#sThrV').textContent=cfg.thr+'%';
+  $('#sShow').checked=cfg.show;
+  $('#sAuto').checked=cfg.auto;$('#sDelayRow').hidden=!cfg.auto;
+  $('#sDelay').value=cfg.delay;$('#sDelayV').textContent=cfg.delay+' giây';
+  $('#voiceInfo').textContent='Giọng đọc: '+(VOICE.en?VOICE.en.name:'mặc định')+' · Tiếng Việt: '+(VOICE.vi?VOICE.vi.name:'không có trên máy này (vẫn hiện chữ)');
+}
+$('#sWait').oninput=e=>{cfg.wait=+e.target.value;save();renderSet()};
+$('#sRate').oninput=e=>{cfg.rate=+e.target.value;save();renderSet()};
+$('#sThr').oninput=e=>{cfg.thr=+e.target.value;save();renderSet()};
+$('#sShow').onchange=e=>{cfg.show=e.target.checked;save()};
+$('#sAuto').onchange=e=>{cfg.auto=e.target.checked;save();renderSet()};
+$('#sDelay').oninput=e=>{cfg.delay=+e.target.value;save();renderSet()};
+$('#reset').onclick=()=>{if(confirm('Xóa toàn bộ tiến độ trên máy này?')){wrong.clear();known.clear();save();alert('Đã xóa.')}};
+$('#tMic').onclick=async()=>{
+  unlockAudio();const out=$('#tOut');
+  if(!VOICES.length)await loadVoices();renderSet();
+  out.textContent='🔊 Đang đọc…';await speak('Please say: Hello, how are you?');
+  if(!SR){out.textContent='Loa OK. Trình duyệt này không hỗ trợ nhận giọng nói.';return}
+  await beep();out.textContent='🎤 Mời bạn nói…';
+  const save_=cfg.wait;cfg.wait=6;
+  const r=await listen({cd:()=>{},armed:()=>{out.textContent='🎤 Mời bạn nói…'},speaking:()=>{out.textContent='🗣 Đang nghe…'},text:t=>{out.textContent='🗣 '+t}},'Hello, how are you?');
+  cfg.wait=save_;
+  if(r.err&&!r.cands.length)out.textContent='⚠️ Micro lỗi: '+r.err+'. Kiểm tra quyền micro của trình duyệt.';
+  else if(!r.cands.length)out.textContent='⏱ Chưa nghe thấy gì. Kiểm tra micro rồi thử lại.';
+  else out.textContent='✅ Máy nghe được: "'+r.cands[0]+'" ('+analyze('Hello, how are you?',r.cands[0]).score+'%)';
+};
+
+loadVoices();
+renderHome();
+</script>
+</body>
+</html>
